@@ -1,0 +1,442 @@
+from tkinter import*
+from tkinter import ttk
+from tkinter import messagebox
+import sys
+root =Tk()
+root.title("FLIGHT BOOKING")
+root.geometry("1920x1080")
+root.configure(bg ="#fff") 
+#root.resizable(False,False) #no useṇ
+
+img = PhotoImage(file="Plane.png")
+Label(root,image=img,bg="white").place(x=50,y=100)
+username_var=StringVar()
+password_var=StringVar()
+#frame of main window
+frame=Frame(root,width=550,height=550,bg="White")
+frame.place(x=1020,y=170)
+
+heading=Label(frame,text="Sign in",fg="#57a1f8",bg="White",font=("MADE Okine Sans light",35))
+heading.grid(row=0,column=1,padx=0,pady=0,ipadx=0,ipady=30)
+
+#variable to store values
+username_var=StringVar()
+password_var=StringVar()
+
+# function to create user window and Signin User
+def user_window():
+    global user_window1
+    global username
+    global password 
+    global root  
+   
+    
+    #destroy Main window
+    root.withdraw()
+    
+    # create second window
+    user_window1 = Tk()
+    user_window1.title("User Window")
+    user_window1.geometry("1920x1080")
+    user_window1.configure(bg ="#fff")
+    
+    #frame of user window
+    frame_user=Frame(user_window1,width=550,height=550,bg="white")
+    frame_user.place(x=1020,y=170)
+
+
+    heading=Label(frame_user,text="Sign in",fg="#57a1f8",bg="white",font=("MADE Okine Sans light",35))
+    heading.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=30)
+    
+    #Username Signin
+    username=Entry(frame_user,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    username.grid(row=1,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    username.insert(0,"pratik")
+    
+    Frame(frame_user,width=295,height=2,bg="black").grid(row=2,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    
+    #Password Signin
+    password=Entry(frame_user,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    password.grid(row=3,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    password.insert(0,"yerme")
+
+    Frame(frame_user,width=295,height=2,bg="black").grid(row=4,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+        
+
+    #User Signin button
+    button_signin=Button(frame_user,width=15,height=2,text="Sign in",fg="white",font=("MADE Okine Sans light",14),bg="#57a1f8",border=0,command=signin)
+    button_signin.grid(row=5,column=0,padx=0,pady=25,ipadx=0,ipady=0)
+    
+
+           
+    label_signup=Label(frame_user,text="Don't have an account?",fg="black",bg="white",font=("MADE Okine Sans",12))
+    label_signup.grid(row=6,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    #User Signup button
+    button_signup=Button(frame_user,width=6,text="Sign up",font=("MADE Okine Sans bold",12),border=0,bg="white",fg="#57a1f8",command=signup)
+    button_signup.grid(row=7,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    #Back to user root window
+    back_button_userwindow =Button(user_window1, text="🔙",fg="#57a1f8", width=5,height=0,border=0,bg="white",font=("MADE Okine Sans",20),command=back_to_root_window_from_user_window)
+    back_button_userwindow.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+
+# Signin and Sign up window
+def signup():
+    global user_window1
+    global signup_username
+    global signup_password  
+    global confirm_signup_password
+    global signup_email
+    global user_signup
+  
+    #destroy Main window
+    user_window1.withdraw()
+    # create second window
+    user_signup = Tk()
+    user_signup.title("Signup Window")
+    user_signup.geometry("1920x1080")
+    user_signup.configure(bg ="#fff")
+    
+    #frame of user window
+    frame_signin=Frame(user_signup,width=550,height=550,bg="white")
+    frame_signin.place(x=730,y=200)
+
+
+    heading=Label(frame_signin,text="Signup",fg="#57a1f8",bg="white",font=("MADE Okine Sans light",35))
+    heading.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=30)
+    
+    #Username Signin
+    signup_username=Entry(frame_signin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    signup_username.grid(row=1,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    signup_username.insert(0,"Username")
+    
+    Frame(frame_signin,width=295,height=2,bg="black").grid(row=2,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    
+    #Password Signin
+    signup_password=Entry(frame_signin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    signup_password.grid(row=3,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    signup_password.insert(0,"Password")
+
+    
+    Frame(frame_signin,width=295,height=2,bg="black").grid(row=4,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    #User Signup Email
+    confirm_signup_password=Entry(frame_signin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    confirm_signup_password.grid(row=5,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    confirm_signup_password.insert(0,"Confirm password")
+
+    
+    Frame(frame_signin,width=295,height=2,bg="black").grid(row=6,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    signup_email=Entry(frame_signin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    signup_email.grid(row=7,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    signup_email.insert(0,"Email")
+
+    
+    Frame(frame_signin,width=295,height=2,bg="black").grid(row=8,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+        
+
+    #User Register button
+    button_register=Button(frame_signin,width=15,height=2,text="Register",fg="white",font=("MADE Okine Sans light",14),bg="#57a1f8",border=0,command=register)
+    button_register.grid(row=9,column=0,padx=0,pady=25,ipadx=0,ipady=0)
+    
+    # Back button
+    back_button_signup_to_user =Button(user_signup, text="🔙",fg="#57a1f8", width=5,height=0,border=0,bg="white",font=("MADE Okine Sans",20),command=back_to_sign_window)
+    back_button_signup_to_user.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    
+    
+    
+#User SignIn Mysql function   
+def signin():
+    global username
+    global password
+    global user_window1
+    # global flight_list_window
+    # global flight_list_user
+    username_var=username.get()
+    password_var=password.get()
+    # password=password_var()
+    # username=username_var()
+    #connecting mysql
+    import mysql.connector as con
+    connection = con.connect(host="localhost",user="root",password="starboy22*",database="flight")
+    
+    cursor = connection.cursor()
+
+    #show error if all fields are not entered
+    if (username_var =="" or password_var==""):
+        messagebox.showerror("Error","All fields are required")
+        return
+    
+    
+    cursor.execute("select count(*) from login_data")  
+    afetch = cursor.fetchone()
+    bfetch = afetch[0] #it has the number of rows
+    
+    cursor.execute('select username,password from login_data where username=username and password=password')
+    row=cursor.fetchall()
+#     print(row)
+#    # print(bfetch)     
+#     print(row[0][0])
+#     print(username)
+#     print(row[0][1])
+    global counter
+    counter=0
+    for i in range(0,bfetch):
+    
+        if(row[i][0]==username_var and row[i][1]==password_var ):
+            counter=1 
+           
+    
+    if (counter==1):
+        messagebox.showinfo("Found","Logging In")
+        flight_list_user()
+    
+    else:
+        messagebox.showinfo("Not found","password and username does not exsist")
+
+    connection.close()            
+    # else:
+    #     print("Login","Login Successful")
+    
+
+#User Registration Values insert in table
+def register():    
+    global signup_username
+    global signup_password  
+    global confirm_signup_password
+    global signup_email 
+    
+    #if any entry is empty
+    if (signup_username.get()==""or signup_password.get()==""or confirm_signup_password.get()==""or signup_email.get()==""):
+
+        messagebox.showerror("Error","All Fields Are Required")
+        
+    #Confirming Password
+    elif signup_password.get()!=confirm_signup_password.get():
+        messagebox.showerror("Error","Password and Confirm Password Should Be Same")
+    
+    #variables to store values    
+    else:
+        printuser=signup_username.get()
+        printpass=signup_password.get()
+        printemail=signup_email.get()
+        
+
+
+    #Mysql connection
+    import mysql.connector as con
+    connection = con.connect(host="localhost", user="root", password="starboy22*", database="flight")
+
+    cursor = connection.cursor()
+
+    #Mysql Query
+    cursor.execute("INSERT INTO login_data (username,password,email) VALUES (%s, %s , %s)", (printuser, printpass, printemail))
+    connection.commit()     # connnection.commit()
+  
+    connection.close() #closing connection
+
+    messagebox.showinfo("Success", "Register Succesful")
+    
+    messagebox.showinfo("Hello","Please Login to continue" )
+
+# Admin window
+def admin_window():
+    global admin_window1
+    global admin_username
+    global admin_password
+    #destroy Main window
+    root.withdraw()
+    # create second window
+    admin_window1 = Tk()
+    admin_window1.title("Admin Window")
+    admin_window1.geometry("1920x1080")
+    admin_window1.configure(bg ="#fff")
+    
+    #frame of admin login window
+    frame_admin=Frame(admin_window1,width=550,height=550,bg="white")
+    frame_admin.place(x=600,y=200)
+
+    heading=Label(frame_admin,text="Sign in",fg="#57a1f8",bg="White",font=("MADE Okine Sans light",35))
+    heading.grid(row=0,column=0,padx=200,pady=0,ipadx=0,ipady=30)
+    
+    #Username Signin
+    admin_username=Entry(frame_admin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    admin_username.grid(row=1,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    admin_username.insert(0,"Username")
+    
+    Frame(frame_admin,width=295,height=2,bg="black").grid(row=2,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    
+    #Password Signin
+    admin_password=Entry(frame_admin,width=25,fg="black",border=0,bg="white",font=("MADE Okine Sans light",14))
+    admin_password.grid(row=3,column=0,padx=0,pady=10,ipadx=0,ipady=0)
+    admin_password.insert(0,"Password")
+
+    
+    Frame(frame_admin,width=295,height=2,bg="black").grid(row=4,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    #Admin Signin button
+    button_signin=Button(frame_admin,width=15,height=2,text="Sign in",fg="white",font=("MADE Okine Sans light",14),bg="#57a1f8",border=0,command=admin_signin)
+    button_signin.grid(row=5,column=0,padx=0,pady=25,ipadx=0,ipady=0)
+    #Back to user root window
+    back_button_adminwindow =Button(admin_window1, text="🔙",fg="#57a1f8", width=5,height=0,border=0,bg="white",font=("MADE Okine Sans",20),command=back_to_root_window)
+    back_button_adminwindow.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    # back button to user window
+# Admin Mysql signin function
+def admin_signin():
+    global admin_username
+    global admin_password
+    global user_window1
+    
+    # admin_username_var=admin_username.get()
+    # admin_password_var=admin_password.get()
+
+
+    #connecting mysql
+    import mysql.connector as con
+    connection = con.connect(host="localhost",user="root",password="starboy22*",database="flight")
+    
+    cursor = connection.cursor()
+
+    #show error if all fields are not entered
+    if (admin_username.get() =="" or admin_password.get()==""):
+        messagebox.showerror("Error","All fields are required")
+        return
+    
+    
+    cursor.execute("select count(*) from admin_data")  
+    afetch = cursor.fetchone()
+    bfetch = afetch[0] #it has the number of rows
+    
+    cursor.execute('select username,password from admin_data where username=username and password=password')
+    row=cursor.fetchall()
+    
+    global counter
+    counter=0
+    for i in range(0,bfetch):
+    
+        if(row[i][0]==admin_username.get() and row[i][1]==admin_password.get() ):
+            counter=1 
+           
+    
+    if (counter==1):
+        messagebox.showinfo("Found","Logging In")
+        admin_setting_window()
+         
+    else:
+        messagebox.showinfo("Not found","password and username does not exsist")
+
+    connection.close()        
+
+# back to Main Window from user window
+def back_to_root_window_from_user_window():
+    global user_window1 
+    global root
+    # back to root window
+    
+    root.deiconify()
+    user_window1.destroy()
+
+# back to Main Window from admin window
+def back_to_root_window():
+    global admin_window
+    global admin_window1 
+    global root
+    
+    # back to Main/root window
+    root.deiconify()
+    # destroying admin window
+    admin_window1.destroy()
+
+
+# back button to user window
+def back_to_user_window():
+    global flight_list_window
+    global user_window
+    
+    # back to User signin window
+    user_window()
+    # destroying flight list window
+    flight_list_window.destroy()
+    
+    
+# back button to Sigin window
+def back_to_sign_window():
+    global user_window1
+    global user_signup
+    # back to user and admin window 
+    user_window()
+    # destroying signup window
+    user_signup.destroy()
+    
+       
+        
+
+#flight list window show flights
+def flight_list_user():
+   
+    global user_window1
+    global flight_list_window
+    #destroy user_window window
+    user_window1.destroy()
+    # create window
+    flight_list_window = Tk()
+    flight_list_window.title("Flight_List Window")
+    flight_list_window.geometry("1920x1080")
+    flight_list_window.configure(bg ="#fff")
+    
+    # #frame of flight_list_user window
+    # flight_list_user_frame=Frame(flight_list_window,width=550,height=550,bg="black")
+    # flight_list_user_frame.place(x=600,y=200) 
+    back_button_flight_userwindow =Button(flight_list_window, text="🔙",fg="#57a1f8", width=5,height=0,border=0,bg="white",font=("MADE Okine Sans",20),command=back_to_user_window)
+    back_button_flight_userwindow.grid(row=0,column=0,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    #frame of flight_list_user window
+    flight_list_user_frame=Frame(flight_list_window,width=550,height=550,bg="black")
+    flight_list_user_frame.place(x=300,y=200) 
+ 
+    
+    from_box=ttk.Combobox(flight_list_user_frame,textvariable="From")
+    from_box.grid(row=0,column=0)
+    
+    to_label=Label(flight_list_user_frame,text="   To   ",fg="#57a1f8",bg="White",font=("MADE Okine Sans light",15))
+    to_label.grid(row=0,column=1,padx=0,pady=0,ipadx=0,ipady=0)
+    
+    to_box=ttk.Combobox(flight_list_user_frame,textvariable="To")
+    to_box.grid(row=0,column=2)
+
+# Admin System setting window
+def admin_setting_window():
+
+    global admin_window1
+    #destroy admin_window window
+    admin_window1.destroy()
+    # create window
+    system_setting_window = Tk()
+    system_setting_window.title("System Window")
+    system_setting_window.geometry("1920x1080")
+    system_setting_window.configure(bg ="#fff")
+
+   
+
+
+       
+#user buttom for user window
+button_user =Button(frame, text="User",fg="white",width=10,height=3,border=0,bg="#4682B4",font=("MADE Okine Sans",14),command=user_window)
+button_user.grid(row=1,column=0,padx=30,pady=80,ipadx=0,ipady=1)
+
+#admin botton for admin window
+button_admin =Button(frame, text="Admin",fg="white", width=10,height=3,border=0,bg="#4682B4",font=("MADE Okine Sans",14),command=admin_window)
+button_admin.grid(row=1,column=2,padx=30,pady=80,ipadx=0,ipady=1)
+#back button flist list to user window
+
+
+
+
+
+
+root.mainloop()
